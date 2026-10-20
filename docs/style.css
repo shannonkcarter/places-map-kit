@@ -1,0 +1,105 @@
+:root {
+  --bg: #faf8f5;
+  --surface: #ffffff;
+  --ink: #26221e;
+  --muted: #736a61;
+  --line: #e6e0d8;
+  --pin: #8a4b24;      /* overridden by config.json colors.pin */
+  --route: #e8590c;    /* overridden by config.json colors.route */
+  --pin-soft: color-mix(in srgb, var(--pin) 10%, white);
+  --shadow: 0 6px 24px rgba(38, 34, 30, .14);
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  font: 15px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 10px 16px; background: var(--surface); border-bottom: 1px solid var(--line);
+  z-index: 1001;
+}
+.title { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.emoji { font-size: 22px; }
+.emoji:empty { display: none; }
+h1 { font-size: 16px; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#stats { margin: 0; color: var(--muted); font-size: 13px; }
+.controls { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.toggle { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 4px; cursor: pointer; }
+.toggle[hidden] { display: none; }
+.toggle input { accent-color: var(--route); }
+button { font: inherit; cursor: pointer; }
+
+/* Layout */
+main { flex: 1; display: flex; min-height: 0; position: relative; }
+#map { flex: 1; min-height: 0; }
+.panel {
+  width: 320px; background: var(--surface); border-left: 1px solid var(--line);
+  display: flex; flex-direction: column; min-height: 0;
+}
+.handle {
+  display: flex; justify-content: space-between; align-items: center;
+  border: 0; border-bottom: 1px solid var(--line); background: none;
+  padding: 14px 16px; font-weight: 700; font-size: 15px; text-align: left; color: var(--ink);
+  cursor: default;
+}
+.pill { background: var(--pin); color: #fff; border-radius: 999px; padding: 2px 9px; font-size: 12px; }
+.pill:empty { display: none; }
+.panel-body { overflow-y: auto; padding: 12px 16px 20px; }
+.hint { margin: 0 0 12px; color: var(--muted); font-size: 13px; }
+.search {
+  width: 100%; font: inherit; font-size: 15px; padding: 8px 10px; margin-bottom: 8px;
+  border: 1px solid var(--line); border-radius: 8px; background: var(--bg);
+}
+
+/* Place list */
+.list { list-style: none; margin: 0; padding: 0; }
+.list li {
+  display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  padding: 7px 8px; border-radius: 8px; cursor: pointer;
+}
+.list li:hover, .list li.on { background: var(--pin-soft); }
+.list .name { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.list .meta { color: var(--muted); font-size: 12px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.list .empty { color: var(--muted); cursor: default; }
+
+/* Place card (top of the side panel; inside the bottom sheet on phones) */
+.card {
+  padding: 14px 16px; border-bottom: 1px solid var(--line);
+  background: var(--pin-soft); border-left: 4px solid var(--route);
+}
+.card[hidden] { display: none; }
+.pop { position: relative; font-size: 14px; }
+.card-close {
+  position: absolute; top: -6px; right: -6px; border: 0; background: none;
+  font-size: 22px; line-height: 1; color: var(--muted); padding: 4px 8px;
+}
+.card-close:hover { color: var(--ink); }
+.pop h3 { margin: 0 28px 2px 0; font-size: 16px; }
+.pop .addr { color: var(--muted); font-size: 12px; margin: 0 0 8px; }
+.pop .note { margin: 0 0 8px; }
+.pop a { color: var(--route); }
+.pop .visits { list-style: none; padding: 0; margin: 0; max-height: 150px; overflow-y: auto; font-size: 13px; }
+.pop .visits li { padding: 3px 0; border-top: 1px solid var(--line); }
+
+/* Phone: panel becomes a bottom sheet */
+@media (max-width: 720px) {
+  h1 { font-size: 14px; }
+  .emoji { display: none; }
+  .panel {
+    position: absolute; left: 0; right: 0; bottom: 0; width: auto; z-index: 1000;
+    border-left: 0; border-top: 1px solid var(--line); border-radius: 14px 14px 0 0;
+    box-shadow: var(--shadow); max-height: 70%;
+  }
+  .handle { cursor: pointer; }
+  .panel:not(.open) .panel-body { display: none; }
+  .panel:not(.open) .handle { border-bottom: 0; }
+  .leaflet-bottom { bottom: 56px; }
+}

@@ -1,0 +1,14 @@
+{
+  "title": "Coffee Shops We've Run To",
+  "subtitle": "Houston's coffee shops, one Friday run at a time",
+  "emoji": "☕",
+  "city": "Houston, TX",
+  "place_word": "shop",
+  "visit_word": "run",
+  "colors": {
+    "pin": "#8a4b24",
+    "route": "#e8590c"
+  },
+  "about": "Tap a pin to see when we went and the route we took. The orange haze is every route stacked on top of each other.",
+  "route_trim_m": 150
+}

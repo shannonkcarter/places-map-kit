@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Places Map</title>
+  <link rel="icon" id="favicon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📍</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="style.css?v=1">
+</head>
+<body>
+  <header class="bar">
+    <div class="title">
+      <span id="emoji" class="emoji"></span>
+      <div>
+        <h1 id="title">Loading…</h1>
+        <p id="stats"></p>
+      </div>
+    </div>
+    <div class="controls">
+      <label class="toggle" id="heatLabel" hidden><input type="checkbox" id="heatToggle" checked> Routes</label>
+    </div>
+  </header>
+
+  <main>
+    <div id="map" aria-label="Map"></div>
+
+    <aside id="panel" class="panel">
+      <button id="panelHandle" class="handle" type="button" aria-expanded="false">
+        <span id="listTitle">All places</span><span id="count" class="pill"></span>
+      </button>
+      <section id="card" class="card" aria-live="polite" hidden></section>
+      <div class="panel-body">
+        <p id="about" class="hint" hidden></p>
+        <input id="search" class="search" type="search" placeholder="Search" autocomplete="off">
+        <ul id="list" class="list"></ul>
+      </div>
+    </aside>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="app.js?v=1"></script>
+</body>
+</html>
